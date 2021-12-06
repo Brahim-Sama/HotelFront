@@ -1,0 +1,34 @@
+<ng-container class="p-4"> {{ client.email }}</ng-container>
+<table class="table table-striped" *ngIf="clients.length > 0">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nom complet</th>
+      <th>Email</th>
+      <th>Téléphone</th>
+      <th>Ville - Pays</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let client of clients">
+      <td>{{ client.id }}</td>
+      <td>{{ client.nomComplet }}</td>
+      <td>{{ client.email }}</td>
+      <td>{{ client.adresse }}</td>
+      <td>{{ client.telephone }}</td>
+      <td>
+        <a
+          class="btn btn-secondary btn-sm"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          ><i class="fa fa-pencil-square-o" aria-hidden="true"></i
+        ></a>
+        <button class="btn btn-danger btn-sm ms-3">
+          <i class="fa fa-trash-o" aria-hidden="true"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
