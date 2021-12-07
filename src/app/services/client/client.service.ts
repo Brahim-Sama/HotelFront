@@ -18,4 +18,41 @@ export class ClientService {
       this.config.httpOptions
     );
   }
+
+  delete(id?: number): Observable<any> {
+    return this.http.delete(
+      environment.backendUri + 'client/' + id,
+      this.config.httpOptions
+    );
+  }
+
+  getById(id?: number): Observable<Client> {
+    return this.http.get<Client>(
+      environment.backendUri + 'client/' + id,
+      this.config.httpOptions
+    );
+  }
+
+  editClient(id?: number): Observable<any> {
+    return this.http.put(
+      environment.backendUri + 'client/' + id,
+      this.config.httpOptions
+    );
+  }
+
+  add(c: Client): Observable<any> {
+    return this.http.post(
+      environment.backendUri + 'client',
+      c,
+      this.config.httpOptions
+    );
+  }
+
+  update(c: Client): Observable<any> {
+    return this.http.put(
+      environment.backendUri + 'client/' + c.id,
+      c,
+      this.config.httpOptions
+    );
+  }
 }
