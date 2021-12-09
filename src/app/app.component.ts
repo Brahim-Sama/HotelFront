@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Admin } from './classes/admin';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'HotelFront';
+  admin: Admin = new Admin();
 }

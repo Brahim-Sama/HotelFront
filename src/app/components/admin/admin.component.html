@@ -1,1 +1,140 @@
-<p>admin works!</p>
+<ng-container class="p-4">
+  <h1>Listes des admins</h1>
+</ng-container>
+
+<button
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal"
+  class="btn btn-dark"
+  (click)="reset()"
+>
+  Ajouter un admin
+</button>
+
+<table class="table table-striped" *ngIf="admins.length > 0">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Username</th>
+      <th>Role</th>
+      <th>Password</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let admin of admins">
+      <td>{{ admin.id }}</td>
+      <td>{{ admin.username }}</td>
+      <td>{{ admin.role }}</td>
+      <td class="hidetext">{{ admin.password }}</td>
+      <td>
+        <a
+          class="btn btn-secondary btn-sm"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          (click)="editClient(admin.id)"
+          ><i class="fa fa-pencil-square-o" aria-hidden="true"></i
+        ></a>
+        <button class="btn btn-danger btn-sm ms-3">
+          <i
+            class="fa fa-trash-o"
+            aria-hidden="true"
+            (click)="delete(admin.id)"
+          ></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5
+          class="modal-title"
+          id="exampleModalLabel"
+          *ngIf="admin.id == undefined"
+        >
+          Ajouter un admin
+        </h5>
+        <h5
+          class="modal-title"
+          id="exampleModalLabel"
+          *ngIf="admin.id != undefined"
+        >
+          Editer un admin
+        </h5>
+
+        <button
+          type="button"
+          #closebutton
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form ngNativeValidate (submit)="submitClient()">
+        <div class="modal-body">
+          <div class="alert alert-danger" *ngIf="errorMessage.length > 0">
+            {{ errorMessage }}
+          </div>
+          <div class="form-line mb-4">
+            <label class="form-label">Username *</label>
+            <input
+              class="form-control"
+              minlength="2"
+              type="text"
+              name="username"
+              placeholder="NomComplet"
+              [(ngModel)]="admin.username"
+              required
+            />
+          </div>
+
+          <div class="form-line mb-4">
+            <label>Role *</label>
+            <input
+              class="form-control"
+              type="role"
+              name="role"
+              placeholder="Role"
+              [(ngModel)]="admin.role"
+              required
+            />
+          </div>
+
+          <div class="form-line mb-4">
+            <label>Password *</label>
+            <input
+              class="form-control"
+              type="password"
+              name="password"
+              placeholder="Password"
+              [(ngModel)]="admin.password"
+              required
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Fermer
+          </button>
+          <button type="button" type="submit" class="btn btn-primary">
+            Valider
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
